@@ -93,9 +93,6 @@ public class PanelA extends JPanel{
 	public void setTorneos(JButton torneos) {
 		Torneos = torneos;
 	}
-	public Image getBackground() {
-		return background;
-	}
 		
 	
 }

@@ -4,14 +4,14 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
-public class vistaprincipal extends JFrame {
+public class vistajugador extends JFrame{
 
-	private PanelA pa;
+	private PanelB pb;
 
-	public vistaprincipal() {
+	public vistajugador() {
 		
 		
-		setTitle ("SecuritySoft");
+		setTitle ("Jugador");
 		setSize(700, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.black);
@@ -27,16 +27,16 @@ public class vistaprincipal extends JFrame {
 	   public void inicializarComponentes() {
 
 		
-		pa = new PanelA();
-		pa.setBounds(0, 0, 700, 500);
-		getContentPane().add(pa);
+		pb = new PanelB();
+		pb.setBounds(0, 0, 700, 500);
+		getContentPane().add(pb);
 		
 	}
-	public PanelA getPbotones() {
-		return pa;
+	public PanelB getPb() {
+		return pb;
 	}
-	public void setPbotones(PanelA pbotones) {
-		this.pa = pbotones;
+	public void setPb(PanelB pb) {
+		this.pb = pb;
 	}
-
+	   
 }

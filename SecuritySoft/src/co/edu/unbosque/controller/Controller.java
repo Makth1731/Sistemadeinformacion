@@ -5,19 +5,33 @@ import java.awt.event.ActionListener;
 
 import co.edu.unbosque.view.Msg;
 import co.edu.unbosque.view.PanelA;
+import co.edu.unbosque.view.PanelB;
+import co.edu.unbosque.view.PanelC;
+import co.edu.unbosque.view.vistajugador;
+import co.edu.unbosque.view.vistapartida;
 import co.edu.unbosque.view.vistaprincipal;
 
 public class Controller implements ActionListener {
 
 	private vistaprincipal vp;
+	private vistajugador vj;
+	private vistapartida vpp;
 	private PanelA pa;
+	private PanelB pb;
+	private PanelC pc;
 	private Msg msg;
 	
 	public Controller() {
 		vp = new vistaprincipal();
+		vj = new vistajugador();
+		vpp = new vistapartida();
 		pa = new PanelA();
+		pb = new PanelB();
+		pc = new PanelC();
 		msg = new Msg();
 		vp.setVisible(true);
+		vj.setVisible(true);
+		vpp.setVisible(true);
 		asignarOyentes();
 	}
 	public void asignarOyentes() {
