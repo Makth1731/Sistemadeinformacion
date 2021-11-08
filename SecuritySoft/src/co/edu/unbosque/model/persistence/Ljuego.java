@@ -4,6 +4,8 @@ import java.awt.Image;
 
 public class Ljuego {
 	
-	private Image background;
+	private String nombre;
+	private String Tio;
+	
 
 }
