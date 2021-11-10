@@ -13,7 +13,7 @@ public class Partida {
 	
 	public void crearArchivoDatosP() {
 		try {
-			Archivo = new File ("Datos de las partidas" );
+			Archivo = new File ("Datos de la partida" );
 			if (Archivo.createNewFile()) {
 				JOptionPane.showMessageDialog(null, "Archivo Creado");
 				
