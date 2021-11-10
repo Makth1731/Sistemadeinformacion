@@ -16,7 +16,7 @@ public class PanelC extends JPanel{
 	public PanelC() {
 		
 		setLayout(null);
-		setBackground(new ImageIcon(getClass().getResource("/imagenes/j.jpg")).getImage());
+		setBackground(new ImageIcon(getClass().getResource("/imagenes/p.jpg")).getImage());
 		
 		inicializarComponentes();
 		setVisible(true);
