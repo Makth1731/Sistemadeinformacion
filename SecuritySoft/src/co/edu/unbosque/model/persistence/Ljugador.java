@@ -6,7 +6,7 @@ public class Ljugador {
 	private String Edad;
 	private String Genero;
 	
-	public void Jugador (String Nombre, String Genero, String edad) {
+	public void Jugador (String Nombre, String Genero, String Edad) {
 		
 		this.Nombre = Nombre;
 		this.Edad = Edad;
@@ -27,8 +27,8 @@ public class Ljugador {
 		return Edad;
 	}
 
-	public void setEdad(int edad) {
-		Edad = Edad;
+	public void setEdad(String edad) {
+		Edad = edad;
 	}
 
 	public String getGenero() {
@@ -38,5 +38,7 @@ public class Ljugador {
 	public void setGenero(String genero) {
 		Genero = genero;
 	}
+
+	
 
 }
