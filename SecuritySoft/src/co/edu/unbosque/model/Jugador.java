@@ -19,14 +19,14 @@ public class Jugador {
 	
 	public static void EscribirArchivo() {
 		
-	    Ljugador J = new Ljugador();
+	    Ljugador S = new Ljugador();
 	    
 	    File Archivo = new File("Jugadores.info");
 	    
 	    try {
 	    	FileOutputStream fos = new FileOutputStream(Archivo, true);
 	    	ObjectOutputStream oos = new ObjectOutputStream(fos);
-	    	oos.writeObject(J);
+	    	oos.writeObject(S);
 	    	fos.close();
 	    	oos.close();
 	    	
