@@ -7,11 +7,20 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import co.edu.unbosque.controller.Controller;
 
 public class PanelB extends JPanel {
 
 	private JButton batras;
 	private Image background;
+	private JTextField txtNombre1;
+	private JTextField txtEdad1;
+	private JTextField txtGenero1;
+	private JTextField txtNombre2;
+	private JTextField txtEdad2;
+	private JTextField txtGenero2;
 	
 	public PanelB() {
 		
@@ -53,5 +62,16 @@ public class PanelB extends JPanel {
 	public void setBatras(JButton batras) {
 		this.batras = batras;
 	}
+	public void inicializarComponentes(Controller BajoControl){
+		
+		
+		txtNombre1 = new JTextField("");
+		txtEdad1 = new JTextField("");
+		txtGenero1 =new JTextField("");
+		txtNombre2 = new JTextField("");
+		txtEdad2 = new JTextField("");
+		txtGenero2 =new JTextField("");
+	}
+	
 	
 }

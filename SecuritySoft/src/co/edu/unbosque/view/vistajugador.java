@@ -3,6 +3,7 @@ package co.edu.unbosque.view;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class vistajugador extends JFrame{
 
@@ -30,6 +31,22 @@ public class vistajugador extends JFrame{
 		pb = new PanelB();
 		pb.setBounds(0, 0, 700, 500);
 		getContentPane().add(pb);
+		
+		JTextField TxtNombre1 = new JTextField();
+		TxtNombre1.setColumns(10);
+		TxtNombre1.setBounds(183, 119, 200, 20);
+		getContentPane().add(TxtNombre1);
+		
+		JTextField TxtEdad1 = new JTextField();
+		TxtEdad1.setColumns(10);
+		TxtEdad1.setBounds(183, 75, 200, 20);
+		getContentPane().add(TxtEdad1);
+		
+		JTextField TxtGenero1 = new JTextField();
+		TxtGenero1.setColumns(10);
+		TxtGenero1.setBounds(183, 25, 200, 20);
+		getContentPane().add(TxtGenero1);
+			
 		
 	}
 	public PanelB getPb() {

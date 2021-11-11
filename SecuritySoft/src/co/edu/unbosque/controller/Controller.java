@@ -3,6 +3,7 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import co.edu.unbosque.model.Jugador;
 import co.edu.unbosque.view.Msg;
 import co.edu.unbosque.view.PanelA;
 import co.edu.unbosque.view.PanelB;
@@ -14,7 +15,8 @@ import co.edu.unbosque.view.vistapartida;
 import co.edu.unbosque.view.vistaprincipal;
 
 public class Controller implements ActionListener {
-
+	
+    private Jugador J;
 	private vistaprincipal vp;
 	private vistajugador vjg;
 	private vistapartida vpp;
@@ -26,6 +28,8 @@ public class Controller implements ActionListener {
 	private Msg msg;
 	
 	public Controller() {
+		
+		J = new Jugador();
 		vp = new vistaprincipal();
 		vjg = new vistajugador();
 		vpp = new vistapartida();
@@ -49,6 +53,7 @@ public class Controller implements ActionListener {
 		vjg.getPb().getBatras().addActionListener(this);
 		vpp.getPc().getBatras().addActionListener(this);
 		vj.getPd().getBatras().addActionListener(this);
+
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
