@@ -1,10 +1,12 @@
 package co.edu.unbosque.model.persistence;
 
-public class Ljuego {
+import java.io.Serializable;
+
+public class Ljuego implements Serializable{
 	
-	private String Juego1;
-	private String Juego2;
-	private String Juego3;
+	private String Juego1 = "Ajedrez";
+	private String Juego2 = "Domino";
+	private String Juego3 = "Parchis";
 	
 	public void Juego (String Juego1, String Juego2, String Juego3) {
 		
