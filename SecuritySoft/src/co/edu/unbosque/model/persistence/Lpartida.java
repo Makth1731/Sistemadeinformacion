@@ -1,13 +1,15 @@
 package co.edu.unbosque.model.persistence;
+import java.io.Serializable;
 
-public class Lpartida {
+public class Lpartida implements Serializable{
 	
-	private String TipoPar;
-	private String Jugador1;
-	private String Jugador2;
-	private double Puntaje1;
-	private double Puntaje2;
+	private static final long serialVersionUID = 1L;
 	
+	private String TipoPar = "a";
+	private String Jugador1 = "a";
+	private String Jugador2 = "a";
+	private double Puntaje1 = 0.0;
+	private double Puntaje2 = 0.0;
 	
 	public void Jugador (String TipoPar, String Jugador1, String Jugador2, double Puntaje1, double Puntaje2) {
 		
@@ -16,7 +18,6 @@ public class Lpartida {
 		this.Jugador2 = Jugador2;
 		this.Puntaje1 = Puntaje1;
 		this.Puntaje2 = Puntaje2;
-		
 		
 	}
 

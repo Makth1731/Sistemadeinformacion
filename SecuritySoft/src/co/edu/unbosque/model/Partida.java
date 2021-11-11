@@ -1,37 +1,67 @@
 package co.edu.unbosque.model;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.JOptionPane;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import co.edu.unbosque.model.persistence.Lpartida;
 
 
-public class Partida {
-	
-	File Archivo;
-	
-	public void crearArchivoDatosP() {
-		try {
-			Archivo = new File ("Datos de la partida" );
-			if (Archivo.createNewFile()) {
-				JOptionPane.showMessageDialog(null, "Archivo Creado");
-				
-			}
-		}catch(IOException e) {
-			System.out.println(e);
-			
-		}
-	}
-	public void EscribirArchivo (Lpartida Lpartida) {
-		try {
-			FileWriter Escribir = new FileWriter (Archivo, true);
-			Escribir.write(Lpartida.getTipoPar() + "%" + Lpartida.getJugador1() + "%" + Lpartida.getJugador2() + "%" + Lpartida.getPuntaje1() + "%" + Lpartida.getPuntaje2() ); 
-		    Escribir.close();
-		    
-		}catch(IOException e) {
-			System.out.println(e);
-		}
-	}
+// En esta clase se implementan los métodos básicos de lectura y escritura
+// de los dos ejemplos de clase, por esta razón, van aquí.
 
+public class Partida{
+
+	
+	private String ruta = "./data/Partida.info";
+
+	private File f; 
+	private FileOutputStream fos;     
+	private ObjectOutputStream oos;
+	private FileInputStream fis;     
+	private ObjectInputStream ois;
+	
+	private Lpartida par;
+	
+	public Partida() {
+		
+		par = new Lpartida();
+	
+	}
+	
+	public String escribirArchivoBinario(Lpartida Lpartida) {
+		String mensaje="Archivo Generado Exitosamente!";
+		f = new File(ruta);
+		try{     
+			fos = new FileOutputStream(f);     
+			oos = new ObjectOutputStream(fos);  
+			oos.writeObject(par);
+			oos.close();
+			fos.close();
+			System.out.println(par);
+		} 
+		catch(FileNotFoundException e){     
+			mensaje= "No se encontro el archivo"; 
+		} 
+		catch(IOException e){     
+			mensaje = "Error al escribir"; 
+		}
+		return mensaje;
+	}
+	
+	public void leerArchivoBinariol() {
+		f = new File(ruta);
+		try {
+			fis = new FileInputStream(f);
+			ois = new ObjectInputStream(fis);
+			par = (Lpartida) ois.readObject();
+			ois.close();
+		}
+		catch(IOException e){     
+			e.printStackTrace(); 
+		} 
+	}
 }
