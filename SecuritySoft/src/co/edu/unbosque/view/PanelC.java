@@ -48,6 +48,7 @@ public class PanelC extends JPanel{
 		batras.setActionCommand("ATRAS");
 
 	}
+	
 	public JButton getBatras() {
 		return batras;
 	}

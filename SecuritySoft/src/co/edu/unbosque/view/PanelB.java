@@ -124,6 +124,13 @@ public class PanelB extends JPanel {
 		batras.setActionCommand("ATRAS");
 
 	}
+	
+	public JButton getBr() {
+		return br;
+	}
+	public void setBr(JButton br) {
+		this.br = br;
+	}
 	public JButton getBatras() {
 		return batras;
 	}

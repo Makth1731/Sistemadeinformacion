@@ -53,6 +53,8 @@ public class Controller implements ActionListener {
 		vjg.getPb().getBatras().addActionListener(this);
 		vpp.getPc().getBatras().addActionListener(this);
 		vj.getPd().getBatras().addActionListener(this);
+		vjg.getPb().getBr().addActionListener(this);
+		vj.getPd().getBr().addActionListener(this);
 
 	}
 	@Override
@@ -79,6 +81,12 @@ public class Controller implements ActionListener {
     		else if(comando.equals("Juegos")) {
     			vp.setVisible(false);
 				vj.setVisible(true);
+				
+			}
+    		else if(comando.equals("Registrar")) {
+    			vj.setVisible(false);
+				vjg.setVisible(true);
+				
 				
 			}
 		
