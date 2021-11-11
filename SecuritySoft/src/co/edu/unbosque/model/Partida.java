@@ -9,58 +9,52 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import co.edu.unbosque.model.persistence.Lpartida;
 
-
-// En esta clase se implementan los métodos básicos de lectura y escritura
-// de los dos ejemplos de clase, por esta razón, van aquí.
-
 public class Partida{
 
-	
-	private String ruta = "./data/Partida.info";
-
 	private File f; 
-	private FileOutputStream fos;     
-	private ObjectOutputStream oos;
-	private FileInputStream fis;     
-	private ObjectInputStream ois;
-	
-	private Lpartida par;
-	
-	public Partida() {
+
+	public static void escribirArchivoBinario() {
 		
-		par = new Lpartida();
-	
-	}
-	
-	public String escribirArchivoBinario(Lpartida Lpartida) {
-		String mensaje="Archivo Generado Exitosamente!";
-		f = new File(ruta);
-		try{     
-			fos = new FileOutputStream(f);     
-			oos = new ObjectOutputStream(fos);  
-			oos.writeObject(par);
+		Lpartida P = new Lpartida();
+		
+		File f = new File("Partida.info");
+		
+		try{ 
+			FileOutputStream fos = new FileOutputStream(f, true);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);  
+			oos.writeObject(P);
 			oos.close();
 			fos.close();
-			System.out.println(par);
 		} 
 		catch(FileNotFoundException e){     
-			mensaje= "No se encontro el archivo"; 
+			System.out.println("Error; no se encuentra el archivo"); 
+			e.printStackTrace(); 
 		} 
 		catch(IOException e){     
-			mensaje = "Error al escribir"; 
+			System.out.println("Error"); 
+			e.printStackTrace(); 
 		}
-		return mensaje;
 	}
 	
 	public void leerArchivoBinariol() {
-		f = new File(ruta);
+		File f = new File("Partida.info");
 		try {
-			fis = new FileInputStream(f);
-			ois = new ObjectInputStream(fis);
-			par = (Lpartida) ois.readObject();
-			ois.close();
+			FileInputStream fis = new FileInputStream(f);
+			ObjectInputStream ois;
+			while(fis.available()>0) {
+				ois = new ObjectInputStream(fis);
+				Lpartida P = (Lpartida) ois.readObject();
+				System.out.println(P);
+				ois.close();
+				fis.close();
+			}
 		}
-		catch(IOException e){     
+		catch(ClassNotFoundException e){     
+			System.out.println("Error; no se encuentra el archivo"); 
+			e.printStackTrace(); 
+		} 
+		catch(IOException e){  
+			System.out.println("Error"); 
 			e.printStackTrace(); 
 		} 
 	}
