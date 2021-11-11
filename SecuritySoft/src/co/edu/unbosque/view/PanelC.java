@@ -40,6 +40,7 @@ public class PanelC extends JPanel{
 	}
 	public void inicializarComponentes() {
 		setBackground(Color.black);
+	
 		
 		batras = new JButton("Atrás");
 		batras.setBounds(450, 400, 200, 50);

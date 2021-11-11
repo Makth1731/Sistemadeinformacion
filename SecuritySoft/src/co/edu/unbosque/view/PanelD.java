@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class PanelD extends JPanel{
 
 	private JButton batras;
+	private JButton br;
 	private Image background;
 	
 	public PanelD() {
@@ -40,6 +41,11 @@ public class PanelD extends JPanel{
 	}
 	public void inicializarComponentes() {
 		setBackground(Color.black);
+		
+		br = new JButton("Registrar");
+		br.setBounds(150, 400, 200, 50);
+		add(br);
+		br.setActionCommand("R");
 		
 		batras = new JButton("Atrás");
 		batras.setBounds(450, 400, 200, 50);

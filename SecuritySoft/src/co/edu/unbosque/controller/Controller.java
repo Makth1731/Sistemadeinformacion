@@ -74,6 +74,7 @@ public class Controller implements ActionListener {
     			vp.setVisible(false);
 				vjg.setVisible(true);
 				
+				
 			}
     		else if(comando.equals("Juegos")) {
     			vp.setVisible(false);
