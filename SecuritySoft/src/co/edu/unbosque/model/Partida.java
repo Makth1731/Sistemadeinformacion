@@ -13,7 +13,7 @@ public class Partida{
 
 	private File f; 
 
-	public static void escribirArchivoBinario() {
+	public static void escribirBinario() {
 		
 		Lpartida P = new Lpartida();
 		
