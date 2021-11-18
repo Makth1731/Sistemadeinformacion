@@ -10,17 +10,10 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class PanelResultado extends JPanel{
+	
 	private static final long serialVersionUID = 1L;
 	private JTextArea txtLectura;
 	private JTextArea txtEscritura;
-	
-	public JTextArea getTxtValores() {
-		return txtEscritura;
-	}
-
-	public void setTxtValores(JTextArea txtValores) {
-		this.txtEscritura = txtValores;
-	}
 
 	public PanelResultado() {
 		
@@ -39,11 +32,22 @@ public class PanelResultado extends JPanel{
 		add(txtLectura);
 	}
 
-
-	public JTextArea getTxtMonto() {
+	public JTextArea getTxtLectura() {
 		return txtLectura;
 	}
 
-	public void setTxtMonto(JTextArea txtMonto) {
-		this.txtLectura = txtMonto;
-	}}
+	public void setTxtLectura(JTextArea txtLectura) {
+		this.txtLectura = txtLectura;
+	}
+
+	public JTextArea getTxtEscritura() {
+		return txtEscritura;
+	}
+
+	public void setTxtEscritura(JTextArea txtEscritura) {
+		this.txtEscritura = txtEscritura;
+	}
+
+
+	
+}
