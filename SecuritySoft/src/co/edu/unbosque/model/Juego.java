@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import co.edu.unbosque.model.persistence.Ljuego;
 
@@ -51,5 +53,27 @@ public class Juego {
 			}
 			
 		}
-
+		private int escribirArchivoJuego() {
+			try {
+				ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(Archivo));
+				Object juego = true;
+				salida.writeObject(juego);
+				salida.close();
+				
+			}catch(IOException e) {
+				return -1;	
+			}
+			return 0;
+		}
+		private int leerArchivoJuego() {
+			try {
+				ObjectInputStream in = new ObjectInputStream(new FileInputStream(Archivo));
+				ArrayList<Ljuego> juego = (ArrayList<Ljuego>)in.readObject(); 
+				in.close();
+				
+			}catch (IOException | ClassNotFoundException e) {		
+				return -1;
+			}
+			return 0;
+		}
 }

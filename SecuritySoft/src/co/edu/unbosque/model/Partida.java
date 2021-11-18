@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import co.edu.unbosque.model.persistence.Lpartida;
 
 public class Partida{
@@ -57,5 +59,29 @@ public class Partida{
 			System.out.println("Error"); 
 			e.printStackTrace(); 
 		} 
+	}
+	
+	private int escribirArchivoPartida() {
+		try {
+			ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(f));
+			Object partida = true;
+			salida.writeObject(partida);
+			salida.close();
+			
+		}catch(IOException e) {
+			return -1;	
+		}
+		return 0;
+	}
+	private int leerArchivoPartida() {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
+			ArrayList<Lpartida> partida = (ArrayList<Lpartida>)in.readObject(); 
+			in.close();
+			
+		}catch (IOException | ClassNotFoundException e) {		
+			return -1;
+		}
+		return 0;
 	}
 }
