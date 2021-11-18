@@ -19,7 +19,7 @@ public class Fachada {
 		lp.getPuntaje2()+
 		lp.getPuntaje2();
 	}
-	public String printLjugador() {
+	public String printLJugador() {
 		return 
 		 lj.getNombre1()+
 		 lj.getNombre2()+

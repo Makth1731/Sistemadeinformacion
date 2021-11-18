@@ -18,7 +18,7 @@ public class Controller implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent evento) {
-	
+		
 		gui.getPanelResultado();
 	
 	}
