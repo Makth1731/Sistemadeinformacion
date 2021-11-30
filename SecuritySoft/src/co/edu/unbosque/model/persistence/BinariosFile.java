@@ -12,10 +12,19 @@ public class BinariosFile {
 
     private ObjectOutputStream salida;
 
-    public BinariosFile(File fileClientes) {
+    public void BinariosFileC(File fileClientes) {
         if (!fileClientes.exists()) {
             try {
                 fileClientes.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void BinariosFileP(File fileProveedores) {
+        if (!fileProveedores.exists()) {
+            try {
+            	fileProveedores.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
