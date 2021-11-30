@@ -15,6 +15,10 @@ public class Vista extends JFrame {
 
     private PanelCliente panelCliente;
 
+    private PanelProveedores panelProveedores;
+    
+    private PanelProducto panelProducto;
+
     public Vista() {
         setTitle("Tienda generica");
         setSize(800,500);
@@ -46,6 +50,14 @@ public class Vista extends JFrame {
         panelCliente = new PanelCliente();
         panelCliente.setBounds(0,100,800,200);
         getContentPane().add(panelCliente);
+
+        panelProveedores = new PanelProveedores();
+        panelProveedores.setBounds(0,100,800,200);
+        getContentPane().add(panelProveedores);
+        
+        panelProducto = new PanelProducto();
+        panelProducto.setBounds(0,100,800,200);
+        getContentPane().add(panelProducto);
     }
 
     public void info(String mensaje) {
@@ -95,4 +107,22 @@ public class Vista extends JFrame {
     public void setPanelCliente(PanelCliente panelCliente) {
         this.panelCliente = panelCliente;
     }
+
+    public PanelProveedores getPanelProveedores() {
+        return panelProveedores;
+    }
+
+    public void setPanelProveedores(PanelProveedores panelProveedores) {
+        this.panelProveedores = panelProveedores;
+    }
+
+	public PanelProducto getPanelProducto() {
+		return panelProducto;
+	}
+
+	public void setPanelProducto(PanelProducto panelProducto) {
+		this.panelProducto = panelProducto;
+	}
+    
+
 }
