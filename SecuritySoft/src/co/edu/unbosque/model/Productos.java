@@ -6,13 +6,13 @@ public class Productos implements Serializable {
 
     private String nombreProducto;
 
-    private int nitProveedor;
+    private String nitProveedor;
 
     private long precioCompra;
 
     private long precioVenta;
 
-    public Productos(String nombreProducto, int nitProveedor, long precioCompra, long precioVenta) {
+    public Productos(String nombreProducto, String nitProveedor, long precioCompra, long precioVenta) {
         this.nombreProducto = nombreProducto;
         this.nitProveedor = nitProveedor;
         this.precioCompra = precioCompra;
@@ -27,11 +27,11 @@ public class Productos implements Serializable {
         this.nombreProducto = nombreProducto;
     }
 
-    public int getNitProveedor() {
+    public String getNitProveedor() {
         return nitProveedor;
     }
 
-    public void setNitProveedor(int nitProveedor) {
+    public void setNitProveedor(String nitProveedor) {
         this.nitProveedor = nitProveedor;
     }
 
