@@ -3,19 +3,20 @@ package co.edu.unbosque.controller;
 import co.edu.unbosque.model.Clientes;
 import co.edu.unbosque.model.Dto;
 import co.edu.unbosque.model.Productos;
-import co.edu.unbosque.view.Frame;
+import co.edu.unbosque.model.Proveedores;
+import co.edu.unbosque.view.Vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller implements ActionListener {
 
-    private final Frame frame;
+    private final Vista frame;
 
     private final Dto dto;
 
     public Controller() {
-        frame = new Frame();
+        frame = new Vista();
         dto = new Dto();
         oyentes();
     }
@@ -47,6 +48,10 @@ public class Controller implements ActionListener {
         frame.getPanelCliente().getPanelModificarCliente().getAceptarBoton().addActionListener(this);
         frame.getPanelCliente().getPanelModificarCliente().getCedulaComboBox().addActionListener(this);
         
+        frame.getPanelProveedores().getPanelAgregarProveedores().getAceptarBoton().addActionListener(this);
+        frame.getPanelProveedores().getPanelModificarProveedores().getAceptarBoton().addActionListener(this);
+        frame.getPanelProveedores().getPanelModificarProveedores().getNitComboBox().addActionListener(this);
+        
         frame.getPanelProducto().getPanelAgregarProducto().getAceptarBoton().addActionListener(this);
         frame.getPanelProducto().getPanelModificarProducto().getAceptarBoton().addActionListener(this);
         frame.getPanelProducto().getPanelModificarProducto().getNombreProductoComboBox().addActionListener(this);
@@ -56,17 +61,20 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         System.out.println(comando);
-        
-        long precioVenta;
-        long precioCompra;
-        String nitProveedor;
-        String nombreProducto;
+
         String busqueda;
         String cedula;
         String nombre;
         String direccion;
         long telefono;
         String correo;
+        String nit;
+        String ciudad;
+        String nombreProducto;
+        String nitProveedor;
+        long precioCompra;
+        long precioVenta;
+        
 
         switch (comando) {
             case "MODULOCLIENTES":
@@ -82,6 +90,7 @@ public class Controller implements ActionListener {
                 frame.getProveedoresModuloDao().setVisible(true);
                 break;
             case "AGREGARCLIENTE":
+                frame.getPanelCliente().setVisible(true);
                 frame.getPanelCliente().getPanelAgregarCliente().setVisible(true);
                 frame.getPanelCliente().getPanelModificarCliente().setVisible(false);
                 break;
@@ -97,6 +106,7 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "MODIFICARCLIENTE":
+                frame.getPanelCliente().setVisible(true);
                 frame.getPanelCliente().getPanelAgregarCliente().setVisible(false);
                 frame.getPanelCliente().getPanelModificarCliente().setVisible(true);
 
@@ -167,6 +177,7 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "AGREGARPRODUCTO":
+            	frame.getPanelProducto().setVisible(true);
             	frame.getPanelProducto().getPanelAgregarProducto().setVisible(true);
                 frame.getPanelProducto().getPanelModificarProducto().setVisible(false);
                 break;
@@ -182,6 +193,7 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "MODIFICARPRODUCTO":
+            	frame.getPanelProducto().setVisible(true);
             	frame.getPanelProducto().getPanelAgregarProducto().setVisible(false);
                 frame.getPanelProducto().getPanelModificarProducto().setVisible(true);
 
@@ -199,66 +211,155 @@ public class Controller implements ActionListener {
                     frame.info("No se pudo eliminar al cliente. Posiblemente no existe.");
                 }
             	
-                break;     		
-        case "PRODUCTOSACEPTARAGREGAR":
-        	try {
-                nombreProducto = frame.getPanelProducto().getPanelAgregarProducto().getNombreProductoField().getText();
-                nitProveedor = frame.getPanelProducto().getPanelAgregarProducto().getNitProveedorField().getText();
-                precioCompra = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
-                precioVenta = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
+                break;   
+            case "PRODUCTOSACEPTARAGREGAR":
+            	try {
+                    nombreProducto = frame.getPanelProducto().getPanelAgregarProducto().getNombreProductoField().getText();
+                    nitProveedor = frame.getPanelProducto().getPanelAgregarProducto().getNitProveedorField().getText();
+                    precioCompra = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
+                    precioVenta = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
 
-                if (nombreProducto.equals("") || nitProveedor.equals("") || String.valueOf(precioCompra).equals("") || String.valueOf(precioVenta).equals("")) {
-                    frame.info("Llene todos los campos");
-                } else {
-                    if (dto.getDaoProductos().agregarProducto(dto.getArrayProductos(), dto.getFileProductos(), nombreProducto, nitProveedor, precioCompra, precioVenta)) {
-                        frame.info("El producto se agregó correctamente.");
+                    if (nombreProducto.equals("") || nitProveedor.equals("") || String.valueOf(precioCompra).equals("") || String.valueOf(precioVenta).equals("")) {
+                        frame.info("Llene todos los campos");
                     } else {
-                        frame.info("Ya existe un producto con el misma nombre.");
+                        if (dto.getDaoProductos().agregarProducto(dto.getArrayProductos(), dto.getFileProductos(), nombreProducto, nitProveedor, precioCompra, precioVenta)) {
+                            frame.info("El producto se agregó correctamente.");
+                        } else {
+                            frame.info("Ya existe un producto con el misma nombre.");
+                        }
+                        
                     }
-                    
+                } catch (NumberFormatException ex) {
+                    frame.info("Recuerde que el nombre del producto y el precio de compra deben contener únicamente números.");
                 }
-            } catch (NumberFormatException ex) {
-                frame.info("Recuerde que el nombre del producto y el precio de compra deben contener únicamente números.");
-            }
-        	break;
-        case "PRODUCTOACEPTARMODIFICAR ":
-        	nombreProducto = (String) frame.getPanelProducto().getPanelModificarProducto().getNombreProductoComboBox().getSelectedItem();
-        	nitProveedor = frame.getPanelProducto().getPanelAgregarProducto().getNitProveedorField().getText();
-        	precioCompra = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
-        	precioVenta = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
+            	break;
+            case "PRODUCTOACEPTARMODIFICAR ":
+            	nombreProducto = (String) frame.getPanelProducto().getPanelModificarProducto().getNombreProductoComboBox().getSelectedItem();
+            	nitProveedor = frame.getPanelProducto().getPanelAgregarProducto().getNitProveedorField().getText();
+            	precioCompra = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
+            	precioVenta = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
 
-             if (dto.getDaoProductos().modificarProducto(dto.getArrayProductos(), dto.getFileProductos(), nombreProducto, nitProveedor, precioCompra, precioVenta)) {
-                 frame.info("El Producto se modificó correctamente.");
-             } else {
-                 frame.info("El Producto no existe.");
-             }
-             break;
-        case "PRODUCTOMODIFICARCOMBO":
-        	 try {
-                 String nombreProductoCombo = (String) frame.getPanelProducto().getPanelModificarProducto().getNombreProductoComboBox().getSelectedItem();
+                 if (dto.getDaoProductos().modificarProducto(dto.getArrayProductos(), dto.getFileProductos(), nombreProducto, nitProveedor, precioCompra, precioVenta)) {
+                     frame.info("El Producto se modificó correctamente.");
+                 } else {
+                     frame.info("El Producto no existe.");
+                 }
+                 break;
+            case "PRODUCTOMODIFICARCOMBO":
+            	 try {
+                     String nombreProductoCombo = (String) frame.getPanelProducto().getPanelModificarProducto().getNombreProductoComboBox().getSelectedItem();
 
-                 Productos productos = dto.getDaoProductos().buscarProducto(dto.getArrayProductos(), nombreProductoCombo);
+                     Productos productos = dto.getDaoProductos().buscarProducto(dto.getArrayProductos(), nombreProductoCombo);
 
-                 frame.getPanelProducto().getPanelModificarProducto().getNitProveedorField().setText(productos.getNitProveedor());
-                 frame.getPanelProducto().getPanelModificarProducto().getPrecioCompraField().setText(String.valueOf(productos.getPrecioCompra()));
-                 frame.getPanelProducto().getPanelModificarProducto().getPrecioVentaField().setText(String.valueOf(productos.getPrecioVenta()));
-             } catch (NullPointerException ex) {
-                 frame.getPanelProducto().getPanelModificarProducto().getNombreProductoField().setText("");
-                 frame.getPanelProducto().getPanelModificarProducto().getNitProveedorField().setText("");
-                 frame.getPanelProducto().getPanelModificarProducto().getPrecioCompraField().setText("");
-                 frame.getPanelProducto().getPanelModificarProducto().getPrecioVentaField().setText("");
-             }
+                     frame.getPanelProducto().getPanelModificarProducto().getNitProveedorField().setText(productos.getNitProveedor());
+                     frame.getPanelProducto().getPanelModificarProducto().getPrecioCompraField().setText(String.valueOf(productos.getPrecioCompra()));
+                     frame.getPanelProducto().getPanelModificarProducto().getPrecioVentaField().setText(String.valueOf(productos.getPrecioVenta()));
+                 } catch (NullPointerException ex) {
+                     frame.getPanelProducto().getPanelModificarProducto().getNombreProductoField().setText("");
+                     frame.getPanelProducto().getPanelModificarProducto().getNitProveedorField().setText("");
+                     frame.getPanelProducto().getPanelModificarProducto().getPrecioCompraField().setText("");
+                     frame.getPanelProducto().getPanelModificarProducto().getPrecioVentaField().setText("");
+                 }
 
+            
+            case "AGREGARPROVEEDOR":
+                frame.getPanelProveedores().setVisible(true);
+            	frame.getPanelProveedores().getPanelAgregarProveedores().setVisible(true);
+                frame.getPanelProveedores().getPanelModificarProveedores().setVisible(false);
+                break;
+            case "BUSCARPROVEEDORES":
+            	 busqueda = frame.datoString("Ingrese el NIT del proveedor que desea buscar: ");
+
+                 Proveedores proveedores = dto.getDaoProveedores().buscarProveedores(dto.getArrayProveedores(), busqueda);
+
+                 if (proveedores != null) {
+                     frame.info(proveedores.toString());
+                 } else {
+                     frame.info("El proveedor no existe.");
+                 }
+                break;
+            case "MODIFICARPROVEEDOR":
+                frame.getPanelProveedores().setVisible(true);
+            	frame.getPanelProveedores().getPanelAgregarProveedores().setVisible(false);
+                frame.getPanelProveedores().getPanelModificarProveedores().setVisible(true);
+
+                frame.getPanelProveedores().getPanelModificarProveedores().getNitComboBox().removeAllItems();
+
+                for (Proveedores proveedoresEncontrado : dto.getArrayProveedores()) {
+                    frame.getPanelProveedores().getPanelModificarProveedores().getNitComboBox().addItem(proveedoresEncontrado.getNit());
+                }
+                break;
+            case "ELIMINARPROVEEDORES":
+            	 busqueda = frame.datoString("Ingrese el Nit del proveedor que desea eliminar: ");
+
+                 if (dto.getDaoProveedores().eliminarProveedores(dto.getArrayProveedores(), dto.getFileProveedores(), busqueda)) {
+                     frame.info("El proveedor se elimin� correctamente.");
+                 } else {
+                     frame.info("No se pudo eliminar al proveedor. Posiblemente no existe.");
+                 }
+                break;
+            case "PROVEEDORESACEPTARAGREGAR":
+                try {
+                    nit = frame.getPanelProveedores().getPanelAgregarProveedores().getNitField().getText();
+                    nombre = frame.getPanelProveedores().getPanelAgregarProveedores().getNombreField().getText();
+                    direccion = frame.getPanelProveedores().getPanelAgregarProveedores().getDireccionField().getText();
+                    telefono = Long.parseLong(frame.getPanelProveedores().getPanelAgregarProveedores().getTelefonoField().getText());
+                    ciudad = frame.getPanelProveedores().getPanelAgregarProveedores().getCiudadField().getText();
+
+                    if (nit.equals("") || nombre.equals("") || direccion.equals("") || String.valueOf(telefono).equals("") || ciudad.equals("")) {
+                        frame.info("Llene todos los campos");
+                    } else {
+                        if (dto.getDaoProveedores().agregarProveedor(dto.getArrayProveedores(), dto.getFileProveedores(), nit, nombre, direccion, telefono, ciudad)) {
+                            frame.info("El proveedor se agreg� correctamente.");
+                        } else {
+                            frame.info("Ya existe un proveedor con el mismo NIT.");
+                        }
+
+                    }
+                } catch (NumberFormatException ex) {
+                    frame.info("Recuerde que la Nit y el tel�fono deben contener �nicamente n�meros.");
+                }
+                break;
+            case "PROVEEDORESACEPTARMODIFICAR":
+            	 nit = frame.getPanelProveedores().getPanelAgregarProveedores().getNitField().getText();
+                 nombre = frame.getPanelProveedores().getPanelAgregarProveedores().getNombreField().getText();
+                 direccion = frame.getPanelProveedores().getPanelAgregarProveedores().getDireccionField().getText();
+                 telefono = Long.parseLong(frame.getPanelProveedores().getPanelAgregarProveedores().getTelefonoField().getText());
+                 ciudad = frame.getPanelProveedores().getPanelAgregarProveedores().getCiudadField().getText();
+
+                if (dto.getDaoProveedores().agregarProveedor(dto.getArrayProveedores(), dto.getFileProveedores(), nit, nombre, direccion, telefono, ciudad)) {
+                    frame.info("El proveedor se modific� correctamente.");
+                } else {
+                    frame.info("El proveedor no existe.");
+                }
+                break;
+            case "PROVEEDORESMODIFICARCOMBO":
+                try {
+                    String nitCombo = (String) frame.getPanelProveedores().getPanelModificarProveedores().getNitComboBox().getSelectedItem();
+
+                    Proveedores proveedor = dto.getDaoProveedores().buscarProveedores(dto.getArrayProveedores(), nitCombo);
+
+                    frame.getPanelProveedores().getPanelModificarProveedores().getNombreField().setText(proveedor.getNombre());
+                    frame.getPanelProveedores().getPanelModificarProveedores().getDireccionField().setText(proveedor.getDireccion());
+                    frame.getPanelProveedores().getPanelModificarProveedores().getTelefonoField().setText(String.valueOf(proveedor.getTelefono()));
+                    frame.getPanelProveedores().getPanelModificarProveedores().getCiudadField().setText(proveedor.getCiudad());
+                } catch (NullPointerException ex) {
+                    frame.getPanelProveedores().getPanelModificarProveedores().getNombreField().setText("");
+                    frame.getPanelProveedores().getPanelModificarProveedores().getDireccionField().setText("");
+                    frame.getPanelProveedores().getPanelModificarProveedores().getTelefonoField().setText("");
+                    frame.getPanelProveedores().getPanelModificarProveedores().getCiudadField().setText("");
+                }
+                break;
         }
 
         if (comando.equals("REGRESARPRODUCTO") || comando.equals("REGRESARCLIENTE") || comando.equals("REGRESARPROVEEDOR")) {
             frame.getClientesModuloDao().setVisible(false);
             frame.getProveedoresModuloDao().setVisible(false);
             frame.getProductosModuloDao().setVisible(false);
+            frame.getPanelCliente().setVisible(false);
+            frame.getPanelProveedores().setVisible(false);
+            frame.getPanelProducto().setVisible(false);
             frame.getPanelModulos().setVisible(true);
         }
-        }
     }
-
-
-
+}
