@@ -10,12 +10,18 @@ public class PanelModulos extends JPanel {
     private JButton moduloProductos;
 
     private JButton moduloProveedores;
-
+    
+    private JButton moduloVentas;
+    
+    private JButton moduloConsultas;
+    
     public PanelModulos() {
         setLayout(new FlowLayout());
+        
         componentes();
         setVisible(true);
     }
+   
 
     public void componentes() {
         moduloClientes = new JButton("Modulo Clientes");
@@ -29,6 +35,14 @@ public class PanelModulos extends JPanel {
         moduloProveedores = new JButton("Modulo Proveedores");
         moduloProveedores.setActionCommand("MODULOPROVEEDORES");
         add(moduloProveedores);
+        
+        moduloVentas = new JButton("Modulo Ventas");
+        moduloVentas.setActionCommand("MODULOVENTAS");
+        add(moduloVentas);
+        
+        moduloConsultas = new JButton("Modulo Consultas");
+        moduloConsultas.setActionCommand("MODULOCONSULTAS");
+        add(moduloConsultas);
     }
 
     public JButton getModuloClientes() {
@@ -42,4 +56,17 @@ public class PanelModulos extends JPanel {
     public JButton getModuloProveedores() {
         return moduloProveedores;
     }
+
+	public JButton getModuloVentas() {
+		return moduloVentas;
+	}
+
+	public void setModuloVentas(JButton moduloVentas) {
+		this.moduloVentas = moduloVentas;
+	}
+
+	public void setModuloProveedores(JButton moduloProveedores) {
+		this.moduloProveedores = moduloProveedores;
+	}
+    
 }
