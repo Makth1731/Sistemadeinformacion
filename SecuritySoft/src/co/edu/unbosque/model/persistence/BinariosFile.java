@@ -3,6 +3,7 @@ package co.edu.unbosque.model.persistence;
 import co.edu.unbosque.model.Clientes;
 import co.edu.unbosque.model.Productos;
 import co.edu.unbosque.model.Proveedores;
+import co.edu.unbosque.model.Ventas;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -35,6 +36,15 @@ public class BinariosFile {
         if (!fileProductos.exists()) {
             try {
             	fileProductos.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void BinariosFileV(File fileVentas) {
+        if (!fileVentas.exists()) {
+            try {
+            	fileVentas.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -106,6 +116,30 @@ public class BinariosFile {
             try {
                 entrada = new ObjectInputStream(new FileInputStream(file));
                 array = (ArrayList<Productos>) entrada.readObject();
+                entrada.close();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return array;
+    }
+    public void escribirArchivoVentas(ArrayList<Ventas> array, File file) {
+        try {
+            salida = new ObjectOutputStream(new FileOutputStream(file));
+            salida.writeObject(array);
+            salida.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public ArrayList<Ventas> leerArchivoVentas(File file) {
+        ArrayList<Ventas> array = new ArrayList<>();
+        if (file.length() != 0) {
+            try {
+                entrada = new ObjectInputStream(new FileInputStream(file));
+                array = (ArrayList<Ventas>) entrada.readObject();
                 entrada.close();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();

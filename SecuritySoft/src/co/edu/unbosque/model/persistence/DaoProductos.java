@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DaoProductos {
-	private final BinariosFile binariosFile;
+	private  BinariosFile binariosFile;
 
 	public DaoProductos(BinariosFile binariosFile) {
 	    this.binariosFile = binariosFile;

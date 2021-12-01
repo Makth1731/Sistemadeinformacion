@@ -4,6 +4,7 @@ import co.edu.unbosque.model.Clientes;
 import co.edu.unbosque.model.Dto;
 import co.edu.unbosque.model.Productos;
 import co.edu.unbosque.model.Proveedores;
+import co.edu.unbosque.model.Ventas;
 import co.edu.unbosque.view.Vista;
 
 import java.awt.event.ActionEvent;
@@ -55,6 +56,10 @@ public class Controller implements ActionListener {
         frame.getPanelProducto().getPanelAgregarProducto().getAceptarBoton().addActionListener(this);
         frame.getPanelProducto().getPanelModificarProducto().getAceptarBoton().addActionListener(this);
         frame.getPanelProducto().getPanelModificarProducto().getNombreProductoComboBox().addActionListener(this);
+        
+        frame.getPanelVentas().getPanelMostrarVenta().getAceptarBoton().addActionListener(this);
+        frame.getPanelVentas().getPanelModificarVenta().getAceptarBoton().addActionListener(this);
+        frame.getPanelVentas().getPanelModificarVenta().getCedulaComboBox().addActionListener(this);
     }
 
     @Override
@@ -74,6 +79,12 @@ public class Controller implements ActionListener {
         String nitProveedor;
         long precioCompra;
         long precioVenta;
+        int codigoVentas;
+		int codigoProductos;
+	    int cantidadVentas;
+		double validarProducto;
+	    double validarVentas;
+        
         
 
         switch (comando) {
@@ -88,6 +99,14 @@ public class Controller implements ActionListener {
             case "MODULOPROVEEDORES":
                 frame.getPanelModulos().setVisible(false);
                 frame.getProveedoresModuloDao().setVisible(true);
+                break;
+            case "MODULOVENTAS":
+                frame.getPanelModulos().setVisible(false);
+                frame.getVentasModuloDao().setVisible(true);
+                break;
+            case "MODULOCONSULTAS":
+                frame.getPanelModulos().setVisible(false);
+                frame.getConsultasModuloDao().setVisible(true);
                 break;
             case "AGREGARCLIENTE":
                 frame.getPanelCliente().setVisible(true);
@@ -350,6 +369,97 @@ public class Controller implements ActionListener {
                     frame.getPanelProveedores().getPanelModificarProveedores().getCiudadField().setText("");
                 }
                 break;
+            case "AGREGARVENTAS":
+                frame.getPanelVentas().setVisible(true);
+                frame.getPanelVentas().getPanelMostrarVenta().setVisible(true);
+                frame.getPanelVentas().getPanelModificarVenta().setVisible(false);
+                break;
+            case "BUSCARVENTAS":
+                busqueda = frame.datoString("Ingrese las ventas del cliente que desea buscar: ");
+
+                Ventas ventas = dto.getDaoVentas().buscarVenta(dto.getArrayVentas(), busqueda);
+
+                if (ventas != null) {
+                    frame.info(ventas.toString());
+                } else {
+                    frame.info("Las ventas no existen.");
+                }
+                break;
+            case "MODIFICARVENTAS":
+                frame.getPanelVentas().setVisible(true);
+                frame.getPanelVentas().getPanelMostrarVenta().setVisible(false);
+                frame.getPanelVentas().getPanelModificarVenta().setVisible(true);
+
+                frame.getPanelVentas().getPanelMostrarVenta().getCedulaComboBox().removeAllItems();
+                for (Ventas ventasEncontrado : dto.getArrayVentas()) {
+                    frame.getPanelVentas().getPanelMostrarVenta().getCedulaComboBox().addItem(ventasEncontrado.getCedula());
+                }
+                break;
+            case "ELIMINARVENTAS":
+                busqueda = frame.datoString("Ingrese la cédula del cliente que desea eliminar: ");
+
+                if (dto.getDaoVentas().eliminarVentas(dto.getArrayVentas(), dto.getFileVentas(), busqueda)) {
+                    frame.info("Las ventas se eliminaron correctamente.");
+                } else {
+                    frame.info("No se pudo eliminar las ventas. Posiblemente no existe.");
+                }
+                break;
+            case "VENTASACEPTARAGREGAR":
+                try {
+                	  cedula = frame.getPanelVentas().getPanelMostrarVenta().getCedulaField().getText();
+                	  codigoVentas = (int) Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getCedulaField().getText());
+                      codigoProductos = (int) Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getNombreField().getText());
+                      cantidadVentas = (int) Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getNombreField().getText());
+                      validarProducto = Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getTelefonoField().getText());
+                      validarVentas = Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getCorreoField().getText());
+
+                      if (cedula.equals("") || String.valueOf(codigoVentas).equals("") || String.valueOf(codigoVentas).equals("") || String.valueOf(cantidadVentas).equals("") || String.valueOf(validarProducto).equals("")|| String.valueOf(validarVentas).equals("") ) {
+                          frame.info("Llene todos los campos");
+                      } else {
+                          if (dto.getDaoVentas().agregarVenta(dto.getArrayVentas(), dto.getFileVentas(), cedula, codigoVentas, codigoProductos, cantidadVentas, validarProducto, validarVentas)) {
+                              frame.info("Las ventas se agregaron correctamente.");
+                          } else {
+                              frame.info("Ya existe ventas con esa cedula.");
+                          }
+
+                      }
+                  } catch (NumberFormatException ex) {
+                      frame.info("Recuerde que la cedula y los codigos deben contener únicamnete números.");
+                  }
+                break;
+            case "VENTASACEPTARMODIFICAR":
+            	cedula = frame.getPanelVentas().getPanelMostrarVenta().getCedulaField().getText();
+          	  codigoVentas = (int) Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getCedulaField().getText());
+                codigoProductos = (int) Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getNombreField().getText());
+                cantidadVentas = (int) Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getNombreField().getText());
+                validarProducto = Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getTelefonoField().getText());
+                validarVentas = Long.parseLong(frame.getPanelVentas().getPanelMostrarVenta().getCorreoField().getText());
+
+                if (dto.getDaoVentas().modificarVentas(dto.getArrayVentas(), dto.getFileVentas(), cedula, codigoVentas, codigoProductos, cantidadVentas, validarProducto, validarVentas)) {
+                    frame.info("El cliente se modificó correctamente.");
+                } else {
+                    frame.info("El cliente ya se cambió.");
+                }
+                break;
+           case "VENTASMODIFICARCOMBO":
+                try {
+                    String cedulaCombo = (String) frame.getPanelVentas().getPanelMostrarVenta().getCedulaComboBox().getSelectedItem();
+
+                    Ventas ventas1 = dto.getDaoVentas().buscarVenta(dto.getArrayVentas(), cedulaCombo);
+
+                    frame.getPanelVentas().getPanelMostrarVenta().getNombreField().setText(String.valueOf(ventas1.getCantidadVentas()));
+                    frame.getPanelVentas().getPanelMostrarVenta().getDireccionField().setText(String.valueOf(ventas1.getCodigoProductos()));
+                    frame.getPanelVentas().getPanelMostrarVenta().getTelefonoField().setText(String.valueOf(ventas1.getCantidadVentas()));
+                    frame.getPanelVentas().getPanelMostrarVenta().getCorreoField().setText(String.valueOf(ventas1.getValidarProducto()));
+                    frame.getPanelVentas().getPanelMostrarVenta().getCorreoField().setText(String.valueOf(ventas1.getValidarVentas()));
+                } catch (NullPointerException ex) {
+                    frame.getPanelVentas().getPanelMostrarVenta().getNombreField().setText("");
+                    frame.getPanelVentas().getPanelMostrarVenta().getDireccionField().setText("");
+                    frame.getPanelVentas().getPanelMostrarVenta().getTelefonoField().setText("");
+                    frame.getPanelVentas().getPanelMostrarVenta().getCorreoField().setText("");
+                    frame.getPanelVentas().getPanelMostrarVenta().getCorreoField().setText("");
+                }
+                break;
         }
 
         if (comando.equals("REGRESARPRODUCTO") || comando.equals("REGRESARCLIENTE") || comando.equals("REGRESARPROVEEDOR") || comando.equals("REGRESARVENTAS") || comando.equals("REGRESARCONSULTAS")) {
@@ -359,6 +469,7 @@ public class Controller implements ActionListener {
             frame.getPanelCliente().setVisible(false);
             frame.getPanelProveedores().setVisible(false);
             frame.getPanelProducto().setVisible(false);
+            frame.getPanelVentas().setVisible(false);
             frame.getPanelModulos().setVisible(true);
         }
     }

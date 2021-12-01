@@ -4,6 +4,7 @@ import co.edu.unbosque.model.persistence.BinariosFile;
 import co.edu.unbosque.model.persistence.DaoClientes;
 import co.edu.unbosque.model.persistence.DaoProductos;
 import co.edu.unbosque.model.persistence.DaoProveedores;
+import co.edu.unbosque.model.persistence.DaoVentas;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,6 +29,12 @@ public class Dto {
 
     private File fileProductos;
     
+    private ArrayList<Ventas> arrayVentas;
+
+    private DaoVentas daoVentas;
+
+    private File fileVentas;
+    
     private BinariosFile binariosFile;
 
     public Dto() {
@@ -48,6 +55,12 @@ public class Dto {
         binariosFile = new BinariosFile(fileProductos);
         daoProductos = new DaoProductos(binariosFile);
         arrayProductos = binariosFile.leerArchivoProductos(fileProductos);
+        
+        fileVentas = new File("data/ventas.out");
+        arrayVentas = new ArrayList<>();
+        binariosFile = new BinariosFile(fileVentas);
+        daoVentas = new DaoVentas(binariosFile);
+        arrayVentas = binariosFile.leerArchivoVentas(fileVentas);
     }
 
     public ArrayList<Clientes> getArrayClientes() {
@@ -128,6 +141,30 @@ public class Dto {
 
 	public void setFileProductos(File fileProductos) {
 		this.fileProductos = fileProductos;
+	}
+
+	public ArrayList<Ventas> getArrayVentas() {
+		return arrayVentas;
+	}
+
+	public void setArrayVentas(ArrayList<Ventas> arrayVentas) {
+		this.arrayVentas = arrayVentas;
+	}
+
+	public DaoVentas getDaoVentas() {
+		return daoVentas;
+	}
+
+	public void setDaoVentas(DaoVentas daoVentas) {
+		this.daoVentas = daoVentas;
+	}
+
+	public File getFileVentas() {
+		return fileVentas;
+	}
+
+	public void setFileVentas(File fileVentas) {
+		this.fileVentas = fileVentas;
 	}
 	
     

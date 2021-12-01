@@ -12,12 +12,18 @@ public class Vista extends JFrame {
     private PanelModuloDao productosModuloDao;
 
     private PanelModuloDao proveedoresModuloDao;
+    
+    private PanelModuloDao ventasModuloDao;
+    
+    private PanelModuloDao consultasModuloDao;
 
     private PanelCliente panelCliente;
 
     private PanelProveedores panelProveedores;
     
     private PanelProducto panelProducto;
+    
+    private PanelVentas panelVentas;
 
     public Vista() {
         setTitle("Tienda generica");
@@ -58,6 +64,10 @@ public class Vista extends JFrame {
         panelProducto = new PanelProducto();
         panelProducto.setBounds(0,100,800,200);
         getContentPane().add(panelProducto);
+        
+        panelVentas = new PanelVentas();
+        panelVentas.setBounds(0,100,800,200);
+        getContentPane().add(panelVentas);
     }
 
     public void info(String mensaje) {
@@ -122,6 +132,30 @@ public class Vista extends JFrame {
 
 	public void setPanelProducto(PanelProducto panelProducto) {
 		this.panelProducto = panelProducto;
+	}
+
+	public PanelVentas getPanelVentas() {
+		return panelVentas;
+	}
+
+	public void setPanelVentas(PanelVentas panelVentas) {
+		this.panelVentas = panelVentas;
+	}
+
+	public PanelModuloDao getVentasModuloDao() {
+		return ventasModuloDao;
+	}
+
+	public void setVentasModuloDao(PanelModuloDao ventasModuloDao) {
+		this.ventasModuloDao = ventasModuloDao;
+	}
+
+	public PanelModuloDao getConsultasModuloDao() {
+		return consultasModuloDao;
+	}
+
+	public void setConsultasModuloDao(PanelModuloDao consultasModuloDao) {
+		this.consultasModuloDao = consultasModuloDao;
 	}
     
 
