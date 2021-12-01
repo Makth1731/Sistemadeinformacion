@@ -95,7 +95,7 @@ public class Controller implements ActionListener {
                 frame.getPanelCliente().getPanelModificarCliente().setVisible(false);
                 break;
             case "BUSCARCLIENTE":
-                busqueda = frame.datoString("Ingrese la cÃ©dula del cliente que desea buscar: ");
+                busqueda = frame.datoString("Ingrese la cédula del cliente que desea buscar: ");
 
                 Clientes cliente = dto.getDaoClientes().buscarCliente(dto.getArrayClientes(), busqueda);
 
@@ -116,10 +116,10 @@ public class Controller implements ActionListener {
                 }
                 break;
             case "ELIMINARCLIENTE":
-                busqueda = frame.datoString("Ingrese la cÃ©dula del cliente que desea eliminar: ");
+                busqueda = frame.datoString("Ingrese la cédula del cliente que desea eliminar: ");
 
                 if (dto.getDaoClientes().eliminarCliente(dto.getArrayClientes(), dto.getFileClientes(), busqueda)) {
-                    frame.info("El cliente se eliminÃ³ correctamente.");
+                    frame.info("El cliente se eliminó correctamente.");
                 } else {
                     frame.info("No se pudo eliminar al cliente. Posiblemente no existe.");
                 }
@@ -136,14 +136,14 @@ public class Controller implements ActionListener {
                         frame.info("Llene todos los campos");
                     } else {
                         if (dto.getDaoClientes().agregarCliente(dto.getArrayClientes(), dto.getFileClientes(), cedula, nombre, direccion, telefono, correo)) {
-                            frame.info("El cliente se agregÃ³ correctamente.");
+                            frame.info("El cliente se agregó correctamente.");
                         } else {
-                            frame.info("Ya existe un cliente con la misma cÃ©dula.");
+                            frame.info("Ya existe un cliente con la misma cédula.");
                         }
 
                     }
                 } catch (NumberFormatException ex) {
-                    frame.info("Recuerde que la cÃ©dula y el telÃ©fono deben contener Ãºnicamente nÃºmeros.");
+                    frame.info("Recuerde que la cédula y el teléfono deben contener únicamente números.");
                 }
                 break;
             case "CLIENTESACEPTARMODIFICAR":
@@ -154,9 +154,9 @@ public class Controller implements ActionListener {
                 correo = frame.getPanelCliente().getPanelModificarCliente().getCorreoField().getText();
 
                 if (dto.getDaoClientes().modificarCliente(dto.getArrayClientes(), dto.getFileClientes(), cedula, nombre, direccion, telefono, correo)) {
-                    frame.info("El cliente se modificÃ³ correctamente.");
+                    frame.info("El cliente se modificó correctamente.");
                 } else {
-                    frame.info("El cliente no existe.");
+                    frame.info("El cliente ya se cambió.");
                 }
                 break;
             case "CLIENTEMODIFICARCOMBO":
@@ -208,7 +208,7 @@ public class Controller implements ActionListener {
                 if (dto.getDaoProductos().eliminarProducto(dto.getArrayProductos(), dto.getFileProductos(), busqueda)) {
                     frame.info("El producto se elimino correctamente.");
                 } else {
-                    frame.info("No se pudo eliminar al cliente. Posiblemente no existe.");
+                    frame.info("No se pudo eliminar el producto. Posiblemente no existe.");
                 }
             	
                 break;   
@@ -223,14 +223,14 @@ public class Controller implements ActionListener {
                         frame.info("Llene todos los campos");
                     } else {
                         if (dto.getDaoProductos().agregarProducto(dto.getArrayProductos(), dto.getFileProductos(), nombreProducto, nitProveedor, precioCompra, precioVenta)) {
-                            frame.info("El producto se agregÃ³ correctamente.");
+                            frame.info("El producto se agregó correctamente.");
                         } else {
                             frame.info("Ya existe un producto con el misma nombre.");
                         }
                         
                     }
                 } catch (NumberFormatException ex) {
-                    frame.info("Recuerde que el nombre del producto y el precio de compra deben contener Ãºnicamente nÃºmeros.");
+                    frame.info("Recuerde que el NIT del producto y los precios deben contener únicamente números.");
                 }
             	break;
             case "PRODUCTOACEPTARMODIFICAR ":
@@ -240,7 +240,7 @@ public class Controller implements ActionListener {
             	precioVenta = Long.parseLong(frame.getPanelProducto().getPanelAgregarProducto().getPrecioCompraField().getText());
 
                  if (dto.getDaoProductos().modificarProducto(dto.getArrayProductos(), dto.getFileProductos(), nombreProducto, nitProveedor, precioCompra, precioVenta)) {
-                     frame.info("El Producto se modificÃ³ correctamente.");
+                     frame.info("El Producto se modificó correctamente.");
                  } else {
                      frame.info("El Producto no existe.");
                  }
@@ -310,14 +310,14 @@ public class Controller implements ActionListener {
                         frame.info("Llene todos los campos");
                     } else {
                         if (dto.getDaoProveedores().agregarProveedor(dto.getArrayProveedores(), dto.getFileProveedores(), nit, nombre, direccion, telefono, ciudad)) {
-                            frame.info("El proveedor se agregï¿½ correctamente.");
+                            frame.info("El proveedor se agregó correctamente.");
                         } else {
                             frame.info("Ya existe un proveedor con el mismo NIT.");
                         }
 
                     }
                 } catch (NumberFormatException ex) {
-                    frame.info("Recuerde que la Nit y el telï¿½fono deben contener ï¿½nicamente nï¿½meros.");
+                    frame.info("Recuerde que la Nit y el teléfono deben contener únicamnete números.");
                 }
                 break;
             case "PROVEEDORESACEPTARMODIFICAR":
@@ -328,7 +328,7 @@ public class Controller implements ActionListener {
                  ciudad = frame.getPanelProveedores().getPanelAgregarProveedores().getCiudadField().getText();
 
                 if (dto.getDaoProveedores().agregarProveedor(dto.getArrayProveedores(), dto.getFileProveedores(), nit, nombre, direccion, telefono, ciudad)) {
-                    frame.info("El proveedor se modificï¿½ correctamente.");
+                    frame.info("El proveedor se modificó correctamente.");
                 } else {
                     frame.info("El proveedor no existe.");
                 }
@@ -352,7 +352,7 @@ public class Controller implements ActionListener {
                 break;
         }
 
-        if (comando.equals("REGRESARPRODUCTO") || comando.equals("REGRESARCLIENTE") || comando.equals("REGRESARPROVEEDOR")) {
+        if (comando.equals("REGRESARPRODUCTO") || comando.equals("REGRESARCLIENTE") || comando.equals("REGRESARPROVEEDOR") || comando.equals("REGRESARVENTAS") || comando.equals("REGRESARCONSULTAS")) {
             frame.getClientesModuloDao().setVisible(false);
             frame.getProveedoresModuloDao().setVisible(false);
             frame.getProductosModuloDao().setVisible(false);

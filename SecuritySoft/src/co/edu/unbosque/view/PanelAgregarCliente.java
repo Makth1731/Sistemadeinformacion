@@ -33,7 +33,7 @@ public class PanelAgregarCliente extends JPanel {
     }
 
     public void componentes() {
-        labelAux = new JLabel("CÃ©dula: ");
+        labelAux = new JLabel("Cedula: ");
         labelAux.setBounds(0,0,100,20);
         add(labelAux);
 
@@ -56,7 +56,7 @@ public class PanelAgregarCliente extends JPanel {
         nombreField.setBounds(110,30,100,20);
         add(nombreField);
 
-        labelAux = new JLabel("DirecciÃ³n: ");
+        labelAux = new JLabel("Dirección: ");
         labelAux.setBounds(0,60,100,20);
         add(labelAux);
 
@@ -64,7 +64,7 @@ public class PanelAgregarCliente extends JPanel {
         direccionField.setBounds(110,60,100,20);
         add(direccionField);
 
-        labelAux = new JLabel("TelÃ©fono: ");
+        labelAux = new JLabel("Teléfono: ");
         labelAux.setBounds(0,90,100,20);
         add(labelAux);
 

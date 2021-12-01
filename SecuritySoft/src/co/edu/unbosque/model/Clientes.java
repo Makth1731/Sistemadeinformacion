@@ -65,11 +65,11 @@ public class Clientes implements Serializable {
     @Override
     public String toString() {
         return "Clientes{" +
-                "cedula='" + cedula + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                ", correo='" + correo + '\'' +
+                "Cedula='" + cedula + '\'' +
+                ", Nombre='" + nombre + '\'' +
+                ", Dirreción='" + direccion + '\'' +
+                ", Telefono=" + telefono +
+                ", Correo='" + correo + '\'' +
                 '}';
     }
 }
