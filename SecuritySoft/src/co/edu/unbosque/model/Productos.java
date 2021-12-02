@@ -50,4 +50,11 @@ public class Productos implements Serializable {
 	    public void setPrecioVenta(long precioVenta) {
 	        this.precioVenta = precioVenta;
 	    }
+
+		@Override
+		public String toString() {
+			return "Productos [nombreProducto=" + nombreProducto + ", nitProveedor=" + nitProveedor + ", precioCompra="
+					+ precioCompra + ", precioVenta=" + precioVenta + "]";
+		}
+	    
 }

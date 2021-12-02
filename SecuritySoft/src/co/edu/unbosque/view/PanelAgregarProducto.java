@@ -74,7 +74,7 @@ public class PanelAgregarProducto extends JPanel {
 
         aceptarBoton = new JButton("Aceptar");
         aceptarBoton.setBounds(0,130,100,20);
-        aceptarBoton.setActionCommand("CLIENTESACEPTAR" + comando);
+        aceptarBoton.setActionCommand("PRODUCTOSACEPTAR" + comando);
         add(aceptarBoton);
 		
 	}

@@ -275,18 +275,17 @@ public class Controller implements ActionListener {
                      frame.getPanelProducto().getPanelModificarProducto().getPrecioVentaField().setText(String.valueOf(productos.getPrecioVenta()));
                  } catch (NullPointerException ex) {
                      frame.getPanelProducto().getPanelModificarProducto().getNombreProductoField().setText("");
-                     frame.getPanelProducto().getPanelModificarProducto().getNitProveedorField().setText("");
                      frame.getPanelProducto().getPanelModificarProducto().getPrecioCompraField().setText("");
                      frame.getPanelProducto().getPanelModificarProducto().getPrecioVentaField().setText("");
                  }
 
-            
+            break;
             case "AGREGARPROVEEDOR":
                 frame.getPanelProveedores().setVisible(true);
             	frame.getPanelProveedores().getPanelAgregarProveedores().setVisible(true);
                 frame.getPanelProveedores().getPanelModificarProveedores().setVisible(false);
                 break;
-            case "BUSCARPROVEEDORES":
+            case "BUSCARPROVEEDOR":
             	 busqueda = frame.datoString("Ingrese el NIT del proveedor que desea buscar: ");
 
                  Proveedores proveedores = dto.getDaoProveedores().buscarProveedores(dto.getArrayProveedores(), busqueda);
@@ -308,7 +307,7 @@ public class Controller implements ActionListener {
                     frame.getPanelProveedores().getPanelModificarProveedores().getNitComboBox().addItem(proveedoresEncontrado.getNit());
                 }
                 break;
-            case "ELIMINARPROVEEDORES":
+            case "ELIMINARPROVEEDOR":
             	 busqueda = frame.datoString("Ingrese el Nit del proveedor que desea eliminar: ");
 
                  if (dto.getDaoProveedores().eliminarProveedores(dto.getArrayProveedores(), dto.getFileProveedores(), busqueda)) {
